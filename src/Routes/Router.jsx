@@ -13,7 +13,9 @@ export const router = createBrowserRouter([
                 index: true,
                 path: "/",
                 element: <Home />,
-
+                loader: async () => {
+                    const res = await fetch('http://localhost:3000/cards');
+                    return res.json()}
             },
         ]
     },
@@ -21,6 +23,7 @@ export const router = createBrowserRouter([
     {
         path: "/challenges",
         element: <Challenges />,
+        
     },
     {
         path: "/myActivities",
