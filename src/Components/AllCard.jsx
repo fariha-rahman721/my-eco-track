@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router';
 
 const AllCard = ({ card }) => {
-    const { title, category, description, imageUrl, impactMetrics, target } = card;
+    const { _id, title, category, description, imageUrl, impactMetric, target } = card;
     return (
         <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -13,7 +14,7 @@ const AllCard = ({ card }) => {
             className="group relative h-full w-full"
         >
            
-            <div className="card flex-col md:flex-row card-side bg-base-100 shadow-xl h-full overflow-hidden border border-base-content/10 transition-all duration-500 hover:shadow-2xl hover:border-primary/30 rounded-none md:rounded-xl group-hover:-translate-y-1">
+            <div className="card flex-col md:flex-row card-side bg-base-100 shadow-xl h-full overflow-hidden   transition-all duration-500 hover:shadow-2xl hover:border-primary/30 rounded-none md:rounded-xl group-hover:-translate-y-1">
 
              
                 <div className="relative w-full md:w-3/5 overflow-hidden">
@@ -31,11 +32,9 @@ const AllCard = ({ card }) => {
                 </div>
 
                 {/* Text Side */}
-                <div className="card-body w-full md:w-3/5 p-4 md:p-6 flex flex-col justify-between relative bg-gradient-to-br-from-base-100 to-base-200">
-                    {/* Decorative watermark */}
-                    <div className="absolute -right-4 -bottom-4 text-6xl md:text-8xl opacity-5 pointer-events-none select-none">
-                        {impactMetrics}
-                    </div>
+                <div className="card-body w-full md:w-3/5 p-4 md:p-6 flex flex-col justify-between relative ">
+                  
+                    
 
                     <div>
                         <h3 className="text-xs font-bold tracking-widest text-primary mb-2 uppercase opacity-70">
@@ -44,16 +43,18 @@ const AllCard = ({ card }) => {
                         <h2 className="card-title text-xl sm:text-2xl md:text-3xl mb-4 relative z-10">
                             {title}
                         </h2>
+                       
                         <p className="text-sm sm:text-base md:text-base text-base-content/70 leading-relaxed line-clamp-3 relative z-10">
                             {description}
                         </p>
+                        <p className='font-semibold m-3 text-green-800'>{impactMetric}</p>
                     </div>
 
                     <div className="card-actions justify-end mt-4 md:mt-6 items-center">
-                        <button className="btn btn-ghost btn-sm gap-2 group-hover:text-primary transition-colors pl-0">
+                        <Link to={`/challengeDetails/${_id}`} className="btn btn-ghost btn-md gap-2 group-hover:text-primary transition-colors pl-0">
                             Explore
                             <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@ import Home from "../Pages/Home/Home";
 import Challenges from "../Pages/Challenges/Challenges";
 import MyActivities from "../Pages/MyActivities/MyActivities";
 import PublicLayout from "../Layouts/PublicLayout";
+import ChallengeDetails from "../Pages/Challenges/ChallengeDetails";
 
 export const router = createBrowserRouter([
     {
@@ -28,6 +29,13 @@ export const router = createBrowserRouter([
                     return res.json()},
                     
         
+    },
+    {
+      path: "/challengeDetails/:id",
+      element: <ChallengeDetails></ChallengeDetails>,
+       loader: async () => {
+                    const res = await fetch('http://localhost:3000/cards');
+                    return res.json()},
     },
     {
         path: "/myActivities",

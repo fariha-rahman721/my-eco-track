@@ -25,7 +25,7 @@ const HowItWorks = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-16">How It Works</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
           {/* Connector Line (Desktop) */}
-          <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gray-100 -z-0"></div>
+          <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gray-100 z-0"></div>
 
           {steps.map((step, idx) => (
             <div key={idx} className="relative z-10 flex flex-col items-center">
