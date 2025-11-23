@@ -4,9 +4,12 @@ import { Link, Outlet, useLoaderData } from 'react-router';
 import Hero from '../../Components/Hero';
 import AllCard from '../../Components/AllCard';
 import Footer from '../../Components/Footer';
-import CommunityImpacts from '../../Components/CommunityImpacts';
+import CommunityImpacts from '../../Components/HowItWorks';
 import { ArrowRightIcon } from 'lucide-react';
 import CommunityTips from '../../Components/CommunityTips';
+import WhyGreen from '../../Components/WhyGreen';
+import UpcomingEvents from '../../Components/UpcomingEvents';
+import HowItWorks from '../../Components/HowItWorks';
 
 
 const Home = () => {
@@ -16,10 +19,12 @@ const Home = () => {
     return (
         <div>
              <Hero banners={data} />
-             <CommunityImpacts data={data}></CommunityImpacts>
 
+            
+             
+             {/* card */}
              <div className="">
-               <h1 className='text-3xl font-bold text-green-900 mb-5'>Active Challenges</h1>
+               <h1 className='text-3xl font-bold text-green-900 m-10'>Active Challenges</h1>
              <div className="w-11/12 mx-auto grid grid-cols-1 lg:w-11/12 lg:grid-cols-2 gap-6 p-2">
              
                 {data.slice(0, 5).map(card => (
@@ -34,12 +39,33 @@ const Home = () => {
            </Link>
             </div>
             </div>
-             
 
-             <div className="w-11/12 mx-auto lg:w-11/12 lg:mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-             <h1>Community Tips</h1>
+           
+             {/* why green */}
+            <WhyGreen></WhyGreen>
+
+              {/* community impacts */}
+
+            <HowItWorks data={data}></HowItWorks>
+             
+            {/* community tips */}
+            
             <CommunityTips data={data}></CommunityTips>
-           </div>
+           
+
+
+           {/* upcoming events */}
+            
+              
+              <div>
+              <UpcomingEvents data={data}></UpcomingEvents>
+              </div>
+
+
+           
+
+
+
             <Footer></Footer>
         </div>
     );

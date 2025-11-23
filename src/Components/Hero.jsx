@@ -15,12 +15,12 @@ const Hero = ({ banners }) => {
                 effect="fade"
                 pagination={{ clickable: true }}
                 loop={true}
-                className="h-full rounded-xl"
+                className="h-full "
             >
                 {banners.map((item) => (
                     <SwiperSlide key={item._id}>
                         <div
-                            className="relative w-full h-full bg-cover bg-center bg-no-repeat rounded-xl"
+                            className="relative w-full h-full bg-cover bg-center bg-no-repeat"
                             style={{
                                 backgroundImage: `url(${item.imageUrl})`,
                             }}
