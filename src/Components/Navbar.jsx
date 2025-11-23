@@ -1,7 +1,24 @@
-import React from 'react';
-import { NavLink } from 'react-router';
+import React, { use } from 'react';
+import toast from 'react-hot-toast';
+import { Link, NavLink } from 'react-router';
+import { AuthContext } from '../Provider/AuthProvider';
+import { UserIcon } from 'lucide-react';
 
 const Navbar = () => {
+
+     const {user, logOut} = use(AuthContext);
+    const handleLogout = () =>{
+    logOut().then(() =>{
+        toast.success('successfully logged out')
+    }  ).catch((error) =>{
+        const errorMessage = error.message;
+        toast.error(errorMessage)
+    })
+    }
+
+
+
+
     const links = <>
         <NavLink className={({ isActive }) =>
             isActive ? "text-shadow-white font-extrabold" : "hover:text-green-100 hover:font-bold"
@@ -12,6 +29,9 @@ const Navbar = () => {
         <NavLink className={({ isActive }) =>
             isActive ? "text-shadow-white font-extrabold" : "hover:text-green-100 hover:font-bold"
         } to='/myActivities'>My Activities</NavLink>
+        <NavLink className={({ isActive }) =>
+            isActive ? "text-shadow-white font-extrabold" : "hover:text-green-100 hover:font-bold"
+        } to='/addNewChallenge'>Add New Challenge</NavLink>
 
     </>
     return (
@@ -40,7 +60,11 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn text-green-900 font-semibold">Login</a>
+                <img className='w-7 h-7 mr-1 lg:w-10 lg:h-10 lg:mr-3 rounded-full' src={`${user? user.photoURL : UserIcon}`} alt="" />
+                {
+                    user? <button onClick={handleLogout} className='btn bg-amber-600 text-white hover:bg-amber-400 cursor-pointer'>LogOut</button> : <NavLink to='/auth/login' className='btn bg-amber-600 hover:bg-amber-400 text-white cursor-pointer'>Login</NavLink>
+                }
+                
             </div>
         </div>
 
