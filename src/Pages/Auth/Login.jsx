@@ -5,6 +5,7 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../firebase/firebase.config';
 import toast, { Toaster } from 'react-hot-toast';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
+import Navbar from '../../Components/Navbar';
 
 const googleProvider = new GoogleAuthProvider()
 
@@ -60,10 +61,12 @@ const Login = () => {
             })
     }
     return (
+        <div className="w-11/12 mx-auto lg:w-11/12 md:w-11/12">
+            <Navbar></Navbar>
         <div className='flex justify-center items-center min-h-screen'>
 
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5">
-                <h1 className='text-2xl font-semibold text-center'>Login Your Account</h1>
+                <h1 className='text-2xl font-semibold text-center text-green-900'>Login To Ecotrack</h1>
                 <form onSubmit={handleLogin} className="card-body">
                     <fieldset className="fieldset">
                         {/* email */}
@@ -98,7 +101,7 @@ const Login = () => {
             </div>
                         <div onClick={handleForgetPassword}><a className="link link-hover">Forgot password?</a></div>
                         {error && <p className='text-red-400 text-xs'>{error}</p>}
-                        <button type="submit" className="btn btn-neutral mt-4">Login</button>
+                        <button type="submit" className="btn bg-green-900 text-white mt-4">Login</button>
 
 
                     </fieldset>
@@ -111,7 +114,7 @@ const Login = () => {
             </div>
             <Toaster></Toaster>
         </div>
-
+        </div>
     );
 };
 
