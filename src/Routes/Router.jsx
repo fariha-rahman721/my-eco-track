@@ -23,6 +23,10 @@ export const router = createBrowserRouter([
     {
         path: "/challenges",
         element: <Challenges />,
+         loader: async () => {
+                    const res = await fetch('http://localhost:3000/cards');
+                    return res.json()},
+                    
         
     },
     {
