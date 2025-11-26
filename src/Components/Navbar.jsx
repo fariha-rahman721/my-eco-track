@@ -6,14 +6,14 @@ import { UserIcon } from 'lucide-react';
 
 const Navbar = () => {
 
-     const {user, logOut} = use(AuthContext);
-    const handleLogout = () =>{
-    logOut().then(() =>{
-        toast.success('successfully logged out')
-    }  ).catch((error) =>{
-        const errorMessage = error.message;
-        toast.error(errorMessage)
-    })
+    const { user, logOut } = use(AuthContext);
+    const handleLogout = () => {
+        logOut().then(() => {
+            toast.success('successfully logged out')
+        }).catch((error) => {
+            const errorMessage = error.message;
+            toast.error(errorMessage)
+        })
     }
 
 
@@ -51,7 +51,7 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <img src="/logo.jpeg" className='w-13 h-13 rounded-full' alt="" />
+                <img src="/logo.jpeg" className='w-10 rounded-full' alt="" />
                 <a className="font-bold pl-2 text-xl text-white">Eco-track</a>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -60,12 +60,37 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <img className='w-7 h-7 mr-1 lg:w-10 lg:h-10 lg:mr-3 rounded-full' src={`${user? user.photoURL : UserIcon}`} alt="" />
-                {
-                    user? <button onClick={handleLogout} className='btn bg-amber-600 text-white hover:bg-amber-400 cursor-pointer'>LogOut</button> : <NavLink to='/auth/login' className='btn bg-amber-600 hover:bg-amber-400 text-white cursor-pointer'>Login</NavLink>
-                }
-                
+                {user ? (
+                    <div className="dropdown dropdown-end">
+                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <img src={user.photoURL || '/default-user.png'} alt="user" />
+                            </div>
+                        </label>
+                        <ul
+                            tabIndex={0}
+                            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-green-800 rounded-box w-52 text-white"
+                        >
+                            <li>
+                                <NavLink to="/myActivities" className="justify-between">
+                                    My Activities
+                                </NavLink>
+                            </li>
+                            <li>
+                                <button onClick={handleLogout} className="text-left">
+                                    Logout
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                ) : (
+                    <NavLink to="/auth/login" className="btn bg-green-900 hover:bg-green-700 text-white cursor-pointer">
+                        Login
+                    </NavLink>
+                )}
             </div>
+
+
         </div>
 
 

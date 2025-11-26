@@ -9,6 +9,9 @@ import DashBoardlayout from "../Layouts/DashBoardlayout";
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
 import ForgetPassword from "../Pages/Auth/ForgetPassword";
+import PrivateRoute from "../Provider/PrivateRoute";
+import Loading from "../Components/Loading";
+
 
 export const router = createBrowserRouter([
     {
@@ -45,11 +48,24 @@ export const router = createBrowserRouter([
     {
         path: "/myActivities",
         element: <MyActivities />,
+         loader: async () => {
+                    const res = await fetch('http://localhost:3000/cards');
+                    return res.json()},
         
     },
     {
+      path: '/loading',
+        element: <Loading></Loading>
+    },
+    {
         path: '/addNewChallenge',
-        element: <AddNewChallenge></AddNewChallenge>
+        element: <PrivateRoute>
+        <AddNewChallenge></AddNewChallenge>
+        </PrivateRoute>,
+        
+    
+        
+        
     },
     {
                     path: '/auth/login',
@@ -65,7 +81,7 @@ export const router = createBrowserRouter([
                     element: <ForgetPassword></ForgetPassword>
                  }
 ],
-     {
+    {
             path: '/dashboard',
             element: <DashBoardlayout></DashBoardlayout>,
             children: [
@@ -76,4 +92,5 @@ export const router = createBrowserRouter([
             ]
 
         },
+     
 )

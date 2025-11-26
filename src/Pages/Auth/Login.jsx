@@ -50,16 +50,18 @@ const Login = () => {
 
 
 
-    const handleGoogleSignIn = () => {
-        signInWithPopup(auth, googleProvider)
-            .then(result => {
-                toast(result)
-            })
-            .catch(error => {
-                const errorMessage = error.message;
-                toast(errorMessage)
-            })
-    }
+   const handleGoogleSignIn = () => {
+    signInWithPopup(auth, googleProvider)
+        .then(result => {
+            const user = result.user;
+            toast.success(`Welcome ${user.displayName || user.email}!`);
+            navigate('/addNewChallenge'); 
+        })
+        .catch(error => {
+            toast.error(error.message);
+        })
+}
+
     return (
         <div className="w-11/12 mx-auto lg:w-11/12 md:w-11/12">
             <Navbar></Navbar>

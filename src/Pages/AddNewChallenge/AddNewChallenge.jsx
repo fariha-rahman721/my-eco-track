@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import {
     ArrowLeft,
     Calendar,
@@ -10,9 +10,11 @@ import {
     Info,
 } from "lucide-react";
 import Navbar from "../../Components/Navbar";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import Footer from "../../Components/Footer";
 import { AuthContext } from "../../Provider/AuthProvider";
+
+
 
 
 const CATEGORIES = [
@@ -26,8 +28,27 @@ const CATEGORIES = [
 
 
 
-const AddNewChallenge = ({ onBack}) => {
+const AddNewChallenge = ({onBack}) => {
      const {user} = use(AuthContext);
+    const {id} = useParams();
+
+      useEffect(() => {
+        if (!user) return;
+        fetch(`http://localhost:3000/cards/${id}`
+            ,{
+                headers: {
+                    authorization: `Bearer ${user.accessToken}`
+                }
+
+            }
+        )
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            }   )
+      }, [user, id]);
+
+    
 
     const [formData, setFormData] = useState({
         title: "",

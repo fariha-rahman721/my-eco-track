@@ -58,6 +58,7 @@ const AllCard = ({ card }) => {
                     </div>
                 </div>
             </div>
+            
         </motion.div>
     );
 };

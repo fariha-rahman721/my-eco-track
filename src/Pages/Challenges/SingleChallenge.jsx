@@ -1,9 +1,39 @@
+
 import { Calendar, Clock, Heart, Leaf, Share2, Target, Trophy, X } from 'lucide-react';
-import React from 'react';
+import React, { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 const SingleChallenge = ({ details }) => {
+    const [joined, setJoined] = useState(false);
 
-    
+    const handleJoin = () => {
+    // Load existing activities from localStorage
+    const saved = JSON.parse(localStorage.getItem("myActivities")) || [];
+
+    // Check duplicate
+    const exists = saved.find(item => item._id === details._id);
+    if (exists) {
+      toast("Already Joined!");
+      setJoined(true);
+      return;
+    } else {
+      toast.success("Challenge Joined Successfully!");
+    }
+
+    // Add progress & joinedDate when saving
+    const newActivity = {
+      ...details,
+      progress: 0,
+      joinedDate: new Date().toISOString()
+    };
+
+    saved.push(newActivity);
+
+    // Save back to localStorage
+    localStorage.setItem("myActivities", JSON.stringify(saved));
+
+    toast("Challenge Joined Successfully!");
+  };
 
     return (
        <div className="card shadow-sm bg-gray-100 
@@ -101,8 +131,8 @@ const SingleChallenge = ({ details }) => {
                             <Share2 size={20} />
                         </button>
 
-                        <button className="flex-1 sm:flex-none bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 rounded-xl font-semibold shadow-lg transition active:scale-95 flex items-center justify-center group">
-                            <span>Join Challenge</span>
+                        <button onClick={() => handleJoin(details._id)} disabled={joined} className="flex-1 sm:flex-none bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 rounded-xl font-semibold shadow-lg transition active:scale-95 flex items-center justify-center group">
+                            <span>{joined? `Joined` : `Join Challenge`}</span>
                             <Target size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
                         </button>
                     </div>
@@ -112,6 +142,7 @@ const SingleChallenge = ({ details }) => {
 
         </div>
     </div>
+    <Toaster></Toaster>
 </div>
 
       
