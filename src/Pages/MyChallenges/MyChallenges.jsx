@@ -24,7 +24,7 @@ const MyChallenges = () => {
                 setActivities(data);
                 setLoading(false);
             }   )
-    }, []);
+    }, [user]);
 
     if(loading){
         return <Loading></Loading>

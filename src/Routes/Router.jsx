@@ -49,9 +49,7 @@ export const router = createBrowserRouter([
     {
         path: "/myActivities",
         element: <MyActivities />,
-         loader: async () => {
-                    const res = await fetch('http://localhost:3000/cards');
-                    return res.json()},
+         
         
     },
     {

@@ -1,30 +1,71 @@
 
 
 import { Calendar, Clock, Heart, Leaf, Share2, Target, Trophy, X } from 'lucide-react';
-import React, { use, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { AuthContext } from '../../Provider/AuthProvider';
+import { s } from 'framer-motion/client';
+
+
 
 
 
 const SingleChallenge = ({ details }) => {
     const { user } = use(AuthContext);
     const [joined, setJoined] = useState(false);
+    const [refetch, setRefetch] = useState(false);
 
+    useEffect(() => {
+        if (!user?.email) return;
+        fetch(`http://localhost:3000/cards/${details._id}`,{
+            headers: {
+                authorization: `Bearer ${user?.accessToken}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                const isJoined = data.participants?.some(participant => participant.createdBy === user?.email);
+                setJoined(isJoined);
+            });
+    }, [user, refetch]);
 
     const handleJoin = () => {
-        fetch('http://localhost:3000/join-challenges', {
+
+        const finalJoined = {
+            
+            title: details.title,
+            category: details.category,
+            imageUrl: details.imageUrl,
+            duration: details.duration,
+            impactMetric: details.impactMetric,
+            target: details.target,
+            startDate: details.startDate,
+            endDate: details.endDate,
+            authorName: details.authorName,
+            upVotes: details.upVotes,
+            description: details.description,
+            createdAt: new Date().toISOString(),
+            participants: details.participants,
+            createdBy: user?.email
+
+
+        }
+
+
+
+        fetch(`http://localhost:3000/join-challenges/${details._id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ ...details, joinedBy: user?.email }),
+            body: JSON.stringify({ finalJoined }),
         })
             .then(res => res.json())
             .then(() => {
-                setJoined(true); 
+                setJoined(true);
                 toast.success("Challenge Joined Successfully!");
+                setRefetch(!refetch);
             })
             .catch(() => {
                 toast.error("Something went wrong!");
@@ -129,7 +170,7 @@ const SingleChallenge = ({ details }) => {
                                 <button className="p-3 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-xl border border-slate-200 transition">
                                     <Share2 size={20} />
                                 </button>
-
+                                
                                 <button
                                     onClick={handleJoin}
                                     disabled={joined}
