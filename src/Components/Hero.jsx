@@ -4,6 +4,7 @@ import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
+import { Link } from "react-router";
 
 
 const Hero = ({ banners }) => {
@@ -48,10 +49,10 @@ const Hero = ({ banners }) => {
 
                                 {/* Action Area: Button & Impact */}
                                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                                    <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-full font-semibold transition-colors flex items-center gap-2">
+                                    <Link to='/challenges' className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-full font-semibold transition-colors flex items-center gap-2">
                                         View Challenge 
                                         <span>&rarr;</span>
-                                    </button>
+                                    </Link>
 
                                     <div className="flex flex-col">
                                         <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Impact</span>

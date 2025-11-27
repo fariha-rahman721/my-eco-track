@@ -11,6 +11,7 @@ import Register from "../Pages/Auth/Register";
 import ForgetPassword from "../Pages/Auth/ForgetPassword";
 import PrivateRoute from "../Provider/PrivateRoute";
 import Loading from "../Components/Loading";
+import MyChallenges from "../Pages/MyChallenges/MyChallenges";
 
 
 export const router = createBrowserRouter([
@@ -62,10 +63,12 @@ export const router = createBrowserRouter([
         element: <PrivateRoute>
         <AddNewChallenge></AddNewChallenge>
         </PrivateRoute>,
-        
-    
-        
-        
+    },
+    {
+        path: '/myChallenges',
+        element: <PrivateRoute>
+        <MyChallenges></MyChallenges>
+        </PrivateRoute>,
     },
     {
                     path: '/auth/login',

@@ -16,9 +16,6 @@ const Navbar = () => {
         })
     }
 
-
-
-
     const links = <>
         <NavLink className={({ isActive }) =>
             isActive ? "text-shadow-white font-extrabold" : "hover:text-green-100 hover:font-bold"
@@ -32,7 +29,7 @@ const Navbar = () => {
         <NavLink className={({ isActive }) =>
             isActive ? "text-shadow-white font-extrabold" : "hover:text-green-100 hover:font-bold"
         } to='/addNewChallenge'>Add New Challenge</NavLink>
-
+        
     </>
     return (
 
@@ -74,6 +71,11 @@ const Navbar = () => {
                             <li>
                                 <NavLink to="/myActivities" className="justify-between">
                                     My Activities
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/myChallenges" className="justify-between">
+                                    My Challenges
                                 </NavLink>
                             </li>
                             <li>
