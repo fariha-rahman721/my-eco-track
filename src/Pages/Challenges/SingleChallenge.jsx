@@ -5,9 +5,6 @@ import React, { use, useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { AuthContext } from '../../Provider/AuthProvider';
-import { s } from 'framer-motion/client';
-
-
 
 
 

@@ -50,7 +50,7 @@ const Home = () => {
              
             {/* community tips */}
             
-            <CommunityTips data={data}></CommunityTips>
+            <CommunityTips></CommunityTips>
            
 
 
