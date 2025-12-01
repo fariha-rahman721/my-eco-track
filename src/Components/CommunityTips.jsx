@@ -1,96 +1,178 @@
-import { Calendar, MessageSquare, ThumbsUp, User } from 'lucide-react';
+import { Calendar, MessageSquare, ThumbsUp, User, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-
+import toast, { Toaster } from 'react-hot-toast';
 
 const CommunityTips = () => {
-  
-  const [tips, setTips] = useState([]);
+    const [tips, setTips] = useState([]);
+    const [activeComment, setActiveComment] = useState(null);
+    const [commentText, setCommentText] = useState('');
 
-  useEffect(() => {
-         
-          fetch(`http://localhost:3000/communityTips`,{
-             
-          })
-              .then(res => res.json())
-              .then(data => setTips(data));
-      }, []);
+    // Local storage for likes
+    const getStoredLikes = () => {
+        const saved = localStorage.getItem('communityLikes');
+        return saved ? JSON.parse(saved) : {};
+    };
 
-  return (
-    <div className="w-11/12 mx-auto ">
-      
-      {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-3xl font-bold text-green-900">Community Tips</h2>
-        
-      </div>
+    // Local storage for comments
+    const getStoredComments = () => {
+        const saved = localStorage.getItem('communityComments');
+        return saved ? JSON.parse(saved) : {};
+    };
 
-      {/* Tips Grid */}
-       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {tips.map((tip) => (
-            <article
-                key={tip._id}
-                className="group relative bg-white flex flex-col justify-between p-8 rounded-3xl border border-slate-200/60 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:border-emerald-500/30 transition-all duration-300 hover:-translate-y-1 overflow-hidden"
-            >
-                {/* Decorative Gradient Blob */}
-                <div className="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 bg-emerald-50 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+    const [likes, setLikes] = useState(getStoredLikes());
+    const [comments, setComments] = useState(getStoredComments());
 
-                <div>
-                    {/* Meta Header */}
-                    <div className="flex justify-between items-center mb-5">
-                        <div className="flex items-center gap-2 text-xs font-medium text-slate-400">
-                            <Calendar className="w-3.5 h-3.5" />
-                            <span>{tip.createdAt}</span>
-                        </div>
-                        {/* Category Tag Mockup */}
-                        <span className="text-[10px] font-bold tracking-wider text-emerald-600 bg-emerald-50 px-2 py-1 rounded uppercase">
-                            Dev
-                        </span>
-                    </div>
+    useEffect(() => {
+        fetch('http://localhost:3000/communityTips')
+            .then(res => res.json())
+            .then(data => setTips(data));
+    }, []);
 
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-emerald-700 transition-colors cursor-pointer leading-snug">
-                        {tip.title}
-                    </h3>
+    // Save likes to localStorage
+    useEffect(() => {
+        localStorage.setItem('communityLikes', JSON.stringify(likes));
+    }, [likes]);
 
-                    {/* Content */}
-                    <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3">
-                        {tip.content}
-                    </p>
-                </div>
+    // Save comments to localStorage
+    useEffect(() => {
+        localStorage.setItem('communityComments', JSON.stringify(comments));
+    }, [comments]);
 
-                {/* Footer */}
-                <div className="flex items-center justify-between pt-6 border-t border-slate-100/80 mt-auto">
-                    {/* Author */}
-                    <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
-                            <User className="w-4 h-4" />
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-xs font-semibold text-slate-700">
-                                {tip.authorName}
-                            </span>
-                            <span className="text-[10px] text-slate-400">Contributor</span>
-                        </div>
-                    </div>
+    // LIKE
+    const handleLike = (id) => {
+        setLikes(prev => ({
+            ...prev,
+            [id]: (prev[id] || 0) + 1
+        }));
+    };
 
-                    {/* Actions */}
-                    <div className="flex items-center gap-4">
-                        <button className="flex items-center gap-1.5 text-slate-400 hover:text-emerald-600 transition-colors group/btn">
-                            <ThumbsUp className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
-                            <span className="text-xs font-medium">{tip.upvotes}</span>
-                        </button>
+    // OPEN COMMENT BOX
+    const handleOpenComment = (id) => {
+        setActiveComment(id);
+    };
 
-                        <button className="flex items-center gap-1.5 text-slate-400 hover:text-blue-600 transition-colors group/btn">
-                            <MessageSquare className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
-                        </button>
-                    </div>
-                </div>
-            </article>
-            ))}
+    // SUBMIT COMMENT
+    const handleSubmitComment = (id) => {
+        if (!commentText.trim()) {
+            toast.error("Please write something first");
+            return;
+        }
+
+        setComments(prev => ({
+            ...prev,
+            [id]: (prev[id] || 0) + 1
+        }));
+
+        toast.success("Your comment submitted ✅");
+        setCommentText('');
+        setActiveComment(null);
+    };
+
+    return (
+        <div className="w-11/12 mx-auto ">
+            <Toaster />
+
+            <div className="flex items-center justify-between mb-8">
+                <h2 className="text-3xl font-bold text-green-900">Community Tips</h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {tips.map((tip) => {
+                    const totalLikes = tip.upvotes + (likes[tip._id] || 0);
+                    const totalComments = comments[tip._id] || 0;
+
+                    return (
+                        <article
+                            key={tip._id}
+                            className="group relative bg-white flex flex-col justify-between p-8 rounded-3xl border border-slate-200/60 shadow hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                        >
+                            <div className="flex justify-between items-center mb-5">
+                                <div className="flex items-center gap-2 text-xs font-medium text-slate-400">
+                                    <Calendar className="w-3.5 h-3.5" />
+                                    <span>{new Date(tip.createdAt).toLocaleDateString()}</span>
+                                </div>
+                                <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded uppercase">
+                                    Dev
+                                </span>
+                            </div>
+
+                            <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-emerald-700">
+                                {tip.title}
+                            </h3>
+
+                            <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                                {tip.content}
+                            </p>
+
+                           {/* cmnt */}
+                            {activeComment === tip._id && (
+                                <div className="mb-4 bg-slate-50 p-4 rounded-xl">
+                                    <div className="flex justify-between items-start">
+                                        <textarea
+                                            value={commentText}
+                                            onChange={(e) => setCommentText(e.target.value)}
+                                            placeholder="Write your comment..."
+                                            className="w-full p-2 border rounded-md text-sm outline-none"
+                                            rows="3"
+                                        />
+                                        <button
+                                            onClick={() => setActiveComment(null)}
+                                            className="ml-2 text-slate-400 hover:text-red-500"
+                                        >
+                                            <X size={16} />
+                                        </button>
+                                    </div>
+
+                                    <button
+                                        onClick={() => handleSubmitComment(tip._id)}
+                                        className="mt-3 bg-emerald-600 text-white px-4 py-1.5 rounded-md text-sm hover:bg-emerald-700"
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
+                            )}
+
+                            <div className="flex items-center justify-between pt-6 border-t border-slate-100 mt-auto">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+                                        <User className="w-4 h-4" />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-xs font-semibold text-slate-700">
+                                            {tip.authorName}
+                                        </span>
+                                        <span className="text-[10px] text-slate-400">Contributor</span>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-4">
+
+                                  
+                                    <button
+                                        onClick={() => handleLike(tip._id)}
+                                        className="flex items-center gap-1.5 text-slate-400 hover:text-emerald-600"
+                                    >
+                                        <ThumbsUp className="w-4 h-4" />
+                                        <span className="text-xs font-medium">{totalLikes}</span>
+                                    </button>
+
+                                   
+                                    <button
+                                        onClick={() => handleOpenComment(tip._id)}
+                                        className="flex items-center gap-1.5 text-slate-400 hover:text-blue-600"
+                                    >
+                                        <MessageSquare className="w-4 h-4" />
+                                        <span className="text-xs font-medium">{totalComments}</span>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </article>
+                    );
+                })}
+            </div>
         </div>
-      ;
-    </div>
-  );
+    );
 };
 
 export default CommunityTips;

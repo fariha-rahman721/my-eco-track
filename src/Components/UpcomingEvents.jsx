@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 const UpcomingEvents = () => {
   const [events, setEvents] = useState([]);
@@ -21,7 +22,6 @@ const UpcomingEvents = () => {
     if (!isoDate) return { month: '', day: '' };
 
     const date = new Date(isoDate);
-
     const month = date.toLocaleString('default', { month: 'short' });
     const day = date.getDate();
 
@@ -31,6 +31,10 @@ const UpcomingEvents = () => {
   if (loading) {
     return <p className="text-center mt-10">Loading events...</p>;
   }
+
+  const handleJoin = () => {
+    toast.success('You have successfully joined the event!');
+  };
 
   return (
     <div className='w-11/12 mx-auto lg:w-11/12 lg:mx-auto'>
@@ -51,6 +55,7 @@ const UpcomingEvents = () => {
               key={event._id || index}
               className="flex bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow group"
             >
+
               {/* Date Badge */}
               <div className="w-24 bg-emerald-50 flex flex-col items-center justify-center p-4 border-r border-emerald-100 group-hover:bg-emerald-600 transition-colors">
                 <span className="text-sm font-bold text-emerald-600 group-hover:text-emerald-200 uppercase tracking-wider">
@@ -75,11 +80,48 @@ const UpcomingEvents = () => {
                   📍 {event.location}
                 </p>
 
-                <div className="flex justify-between items-center mt-4  text-gray-700">
-                  <p className="text-sm text-white bg-emerald-500 p-2 rounded"> Max Participants: {event.maxParticipants} 
-                </p>
-                <p className='text-xs p-2 rounded'>👥 {event.currentParticipants} joined</p>
+                <div className="flex justify-between items-center mt-4 text-gray-700">
+                  <p className="text-sm text-white bg-emerald-500 p-2 rounded">
+                    Max Participants: {event.maxParticipants}
+                  </p>
+                  <p className='text-xs p-2 rounded'>👥 {event.currentParticipants} joined</p>
                 </div>
+
+                {/* ✅ Modal Trigger */}
+                <label
+                  htmlFor={`event-modal-${index}`}
+                  className="btn btn-sm mt-6 bg-emerald-600 hover:bg-emerald-700 text-white border-none"
+                >
+                  Show Details
+                </label>
+                
+
+                {/* ✅ DaisyUI Modal */}
+                <input type="checkbox" id={`event-modal-${index}`} className="modal-toggle" />
+                <div className="modal">
+                  <div className="modal-box bg-emerald-900 text-white relative">
+                    <h3 className="font-bold text-xl mb-2 text-white">
+                      {event.title}
+                    </h3>
+
+                    <p className="py-2 text-white">{event.description}</p>
+
+                    <div className="mt-4 space-y-2 text-sm">
+                      <p><span className="font-semibold">📍 Location:</span> {event.location}</p>
+                      <p><span className="font-semibold">📅 Date:</span> {new Date(event.date).toDateString()}</p>
+                      <p><span className="font-semibold">👤 Organizer:</span> {event.organizer}</p>
+                      <p><span className="font-semibold">👥 Participants:</span> {event.currentParticipants} / {event.maxParticipants}</p>
+                    </div>
+
+                    <div className="modal-action">
+                      <button onClick={handleJoin} className='btn bg-white'>Join Now</button>
+                      <label htmlFor={`event-modal-${index}`} className="btn">
+                        Close
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           );
@@ -104,6 +146,7 @@ const UpcomingEvents = () => {
           </button>
         </div>
       </div>
+      <Toaster></Toaster>
     </div>
   );
 };
