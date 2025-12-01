@@ -13,6 +13,7 @@ import Navbar from "../../Components/Navbar";
 import { Link, useParams } from "react-router";
 import Footer from "../../Components/Footer";
 import { AuthContext } from "../../Provider/AuthProvider";
+import toast, { Toaster } from "react-hot-toast";
 
 const CATEGORIES = [
   "Waste Reduction",
@@ -58,6 +59,10 @@ const AddNewChallenge = ({ onBack }) => {
       ...prev,
       [name]: name === "duration" ? Number(value) : value,
     }));
+  };
+
+  const handlePublish = () => {
+    toast.success("Challenge Published Successfully!");
   };
 
   const handleSubmit = (e) => {
@@ -115,7 +120,7 @@ const AddNewChallenge = ({ onBack }) => {
             className="flex items-center text-gray-500 hover:text-emerald-600 font-medium mb-6 text-sm sm:text-base"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Dashboard
+            Back to Home
           </Link>
 
           {/* Card Container */}
@@ -328,6 +333,7 @@ const AddNewChallenge = ({ onBack }) => {
                 </button>
 
                 <button
+                 onClick={handlePublish}
                   type="submit"
                   className="px-8 py-3 rounded-lg font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-lg flex items-center gap-2"
                 >
@@ -339,6 +345,7 @@ const AddNewChallenge = ({ onBack }) => {
             </form>
           </div>
         </div>
+        <Toaster></Toaster>
       </div>
       <Footer />
     </div>

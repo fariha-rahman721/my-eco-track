@@ -58,7 +58,7 @@ const Home = () => {
             
               
               <div>
-              <UpcomingEvents data={data}></UpcomingEvents>
+              <UpcomingEvents></UpcomingEvents>
               </div>
 
 

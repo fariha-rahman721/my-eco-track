@@ -34,7 +34,7 @@ const Navbar = () => {
     return (
 
 
-        <div className="navbar bg-green-900 shadow-sm w-11/12 md:w-11/12 lg:w-11/12 mx-auto text-white">
+        <div className="navbar bg-emerald-900 shadow-sm w-11/12 md:w-11/12 lg:w-11/12 mx-auto text-white">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

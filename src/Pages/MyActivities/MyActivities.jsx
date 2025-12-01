@@ -5,6 +5,7 @@ import Loading from '../../Components/Loading';
 import { use, useEffect, useState } from 'react';
 import { ArrowRight, Calendar, Flame } from 'lucide-react';
 import Swal from 'sweetalert2';
+import Footer from '../../Components/Footer';
 
 const MyActivities = () => {
     const { user } = use(AuthContext);
@@ -169,6 +170,7 @@ const MyActivities = () => {
                     })}
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 };

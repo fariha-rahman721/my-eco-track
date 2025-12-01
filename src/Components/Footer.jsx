@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 const Footer = () => {
     return (
-        <footer className="bg-green-900 text-white py-10 w-11/12 mx-auto mt-8">
+        <footer className="bg-emerald-900 text-white py-10 w-11/12 mx-auto mt-8">
             <div className="w-11/12 mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
                 
                 {/* Brand & Copyright */}
