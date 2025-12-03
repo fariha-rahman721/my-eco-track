@@ -12,6 +12,7 @@ import ForgetPassword from "../Pages/Auth/ForgetPassword";
 import PrivateRoute from "../Provider/PrivateRoute";
 import Loading from "../Components/Loading";
 import MyChallenges from "../Pages/MyChallenges/MyChallenges";
+import UpdateChallenge from "../Pages/UpdateChallenge/UpdateChallenge";
 
 
 export const router = createBrowserRouter([
@@ -47,10 +48,22 @@ export const router = createBrowserRouter([
                     return res.json()},
     },
     {
+        path: "/updateChallenge/:id",
+        element: <PrivateRoute>
+            <UpdateChallenge></UpdateChallenge>
+            </PrivateRoute>,
+        loader: async () => {
+                    const res = await fetch('http://localhost:3000/cards');
+                    return res.json()},
+       
+    }
+    ,
+    {
         path: "/myActivities",
         element: <PrivateRoute>
          <MyActivities />
-         </PrivateRoute>
+         </PrivateRoute>,
+         
          
         
     },

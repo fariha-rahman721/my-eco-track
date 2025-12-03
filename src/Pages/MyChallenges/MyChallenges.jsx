@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import Loading from '../../Components/Loading';
 import Navbar from '../../Components/Navbar';
@@ -6,8 +6,9 @@ import Footer from '../../Components/Footer';
 import { Toaster } from 'react-hot-toast';
 import { Calendar, Flame } from 'lucide-react';
 
+
 const MyChallenges = () => {
-    const { user } = React.useContext(AuthContext);
+    const { user } = use(AuthContext);
     const [activities, setActivities] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -50,7 +51,7 @@ const MyChallenges = () => {
                                 <h2 className="text-lg font-bold text-gray-800">{activity.title}</h2>
                                 <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
                                 </div>
-                                <div className="flex gap-4 text-xs text-gray-500 mt-2">
+                                <div className="flex justify-center items-center gap-4 text-xs text-gray-500 mt-2">
                                     <span className="flex items-center gap-1">
                                         <Flame className="w-3 h-3" /> {activity.impactMetric || "N/A"}
                                     </span>
@@ -61,7 +62,7 @@ const MyChallenges = () => {
                                 </div>
                             </div>
 
-                            <div className="flex flex-col items-end gap-2">
+                            <div className="flex items-end gap-4">
                                 <span className="text-sm font-semibold text-purple-700">
                                     {activity.participants || 0} Participants
                                 </span>
@@ -69,9 +70,12 @@ const MyChallenges = () => {
                                     {activity.upVotes || 0} Upvotes
                                 </span>
                             </div>
+                             
                         </div>
+
                     ))}
                 </div>
+               
             </div>
 
             <Footer />

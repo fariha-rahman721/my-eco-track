@@ -8,7 +8,7 @@ const ChallengeDetails = () => {
     const data = useLoaderData();
     const { id } = useParams();
 
-    // Directly derive details (React recommended approach)
+    
     const details = data.find(item => String(item._id) === String(id));
 
     return (

@@ -62,8 +62,23 @@ const AddNewChallenge = ({ onBack }) => {
   };
 
   const handlePublish = () => {
+    if (
+      !formData.title ||
+      !formData.category ||
+      !formData.description ||
+      !formData.duration ||
+      !formData.impactMetric ||
+      !formData.imageUrl ||
+      !formData.description ||
+      !formData.startDate ||
+      !formData.endDate
+    ) {
+      return; 
+    }
+
     toast.success("Challenge Published Successfully!");
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -333,13 +348,14 @@ const AddNewChallenge = ({ onBack }) => {
                 </button>
 
                 <button
-                 onClick={handlePublish}
+                  onClick={handlePublish}
                   type="submit"
                   className="px-8 py-3 rounded-lg font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-lg flex items-center gap-2"
                 >
                   <Save className="w-4 h-4" />
                   Publish Challenge
                 </button>
+               
               </div>
 
             </form>

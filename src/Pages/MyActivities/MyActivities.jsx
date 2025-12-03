@@ -6,16 +6,21 @@ import { use, useEffect, useState } from 'react';
 import { ArrowRight, Calendar, Flame } from 'lucide-react';
 import Swal from 'sweetalert2';
 import Footer from '../../Components/Footer';
+import {  useNavigate } from 'react-router';
 
 const MyActivities = () => {
+    
+    
     const { user } = use(AuthContext);
     const [activities, setActivities] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!user?.email) return;
 
         fetch(`http://localhost:3000/my-activities?email=${user?.email}`, {
+            method: "GET",
             headers: {
                 authorization: `Bearer ${user?.accessToken}`,
             },
@@ -27,41 +32,39 @@ const MyActivities = () => {
             });
     }, [user]);
 
-    
+
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
+
             if (result.isConfirmed) {
-
-                
-                fetch(`http://localhost:3000/my-activities/${id}`, {
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        console.log(data);
-
-                       
-                        setActivities(activities.filter((item) => item._id !== id));
-
-                        Swal.fire("Deleted!", "Your challenge has been deleted.", "success");
-                    })
-                    .catch((error) => {
-                        console.error("Error:", error);
+               fetch(`http://localhost:3000/my-activities/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                 authorization: `Bearer ${user?.accessToken}`,
+            }
+           
+        })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            const remaining = activities.filter(item => item._id !== id);
+                            setActivities(remaining);
+                            Swal.fire("Deleted!", "Your challenge has been deleted.", "success");
+                        }
+                        navigate("/challenges");
                     });
             }
+
         });
     };
+
 
     if (loading) {
         return <Loading />;
@@ -160,7 +163,10 @@ const MyActivities = () => {
 
                                 {/* DELETE BUTTON — passes id */}
                                 <button
-                                    onClick={() => handleDelete(card._id)}
+                                    onClick={() => {
+                                       
+                                        handleDelete(card._id);
+                                    }}
                                     className="mt-1 w-full py-2.5 flex items-center justify-center gap-2 bg-slate-50 hover:bg-emerald-600 hover:text-white text-slate-600 font-semibold rounded-xl transition-all duration-300 text-sm"
                                 >
                                     Remove Challenge <ArrowRight className="w-4 h-4" />

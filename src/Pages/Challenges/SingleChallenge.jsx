@@ -5,6 +5,7 @@ import React, { use, useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { AuthContext } from '../../Provider/AuthProvider';
+import { Link } from 'react-router';
 
 
 
@@ -55,8 +56,10 @@ const SingleChallenge = ({ details }) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ finalJoined }),
+                authorization: `Bearer ${user?.accessToken}}`,
+            }
+            ,
+            body: JSON.stringify( finalJoined ),
         })
             .then(res => res.json())
             .then(() => {
@@ -183,6 +186,7 @@ const SingleChallenge = ({ details }) => {
                                         />
                                     )}
                                 </button>
+                                <Link to={`/updateChallenge/${details._id}`} className='btn bg-slate-900 hover:bg-slate-800 text-white'>Update Challenge</Link>
 
 
                             </div>

@@ -38,7 +38,7 @@ const CommunityTips = () => {
         localStorage.setItem('communityComments', JSON.stringify(comments));
     }, [comments]);
 
-    // LIKE
+    // Like
     const handleLike = (id) => {
         setLikes(prev => ({
             ...prev,
@@ -46,12 +46,12 @@ const CommunityTips = () => {
         }));
     };
 
-    // OPEN COMMENT BOX
+    // cmnt box open
     const handleOpenComment = (id) => {
         setActiveComment(id);
     };
 
-    // SUBMIT COMMENT
+    // submit comment
     const handleSubmitComment = (id) => {
         if (!commentText.trim()) {
             toast.error("Please write something first");
