@@ -14,7 +14,7 @@ const MyChallenges = () => {
 
     useEffect(() => {
         if (!user?.email) return;
-        fetch(`http://localhost:3000/myChallenges?email=${user?.email}`, {
+        fetch(`https://eco-track-server-two.vercel.app/myChallenges?email=${user?.email}`, {
             headers: {
                 authorization: `Bearer ${user?.accessToken}`,
             },
@@ -48,8 +48,8 @@ const MyChallenges = () => {
                             <div className="flex gap-4 items-center">
                                 <img className='h-18 w-18 rounded-2xl' src={activity.imageUrl} alt="" />
                                 <div className="">
-                                <h2 className="text-lg font-bold text-gray-800">{activity.title}</h2>
-                                <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
+                                    <h2 className="text-lg font-bold text-gray-800">{activity.title}</h2>
+                                    <p className="text-sm text-gray-600 mt-1">{activity.description}</p>
                                 </div>
                                 <div className="flex justify-center items-center gap-4 text-xs text-gray-500 mt-2">
                                     <span className="flex items-center gap-1">
@@ -70,12 +70,12 @@ const MyChallenges = () => {
                                     {activity.upVotes || 0} Upvotes
                                 </span>
                             </div>
-                             
+
                         </div>
 
                     ))}
                 </div>
-               
+
             </div>
 
             <Footer />

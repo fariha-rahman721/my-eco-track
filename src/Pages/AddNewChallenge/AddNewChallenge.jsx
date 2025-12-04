@@ -30,7 +30,7 @@ const AddNewChallenge = ({ onBack }) => {
 
   useEffect(() => {
     if (!user) return;
-    fetch(`http://localhost:3000/cards/${id}`, {
+    fetch(`https://eco-track-server-two.vercel.app/cards/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
@@ -73,7 +73,7 @@ const AddNewChallenge = ({ onBack }) => {
       !formData.startDate ||
       !formData.endDate
     ) {
-      return; 
+      return;
     }
 
     toast.success("Challenge Published Successfully!");
@@ -96,7 +96,7 @@ const AddNewChallenge = ({ onBack }) => {
       createdBy: user?.email,
     };
 
-    fetch("http://localhost:3000/cards", {
+    fetch("https://eco-track-server-two.vercel.app/cards", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -355,7 +355,7 @@ const AddNewChallenge = ({ onBack }) => {
                   <Save className="w-4 h-4" />
                   Publish Challenge
                 </button>
-               
+
               </div>
 
             </form>

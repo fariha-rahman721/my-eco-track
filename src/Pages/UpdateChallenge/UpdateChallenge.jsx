@@ -43,7 +43,7 @@ const UpdateChallenge = ({ onBack }) => {
     useEffect(() => {
         if (!user || !id) return;
 
-        fetch(`http://localhost:3000/cards/${id}`, {
+        fetch(`https://eco-track-server-two.vercel.app/cards/${id}`, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`,
             },
@@ -90,7 +90,7 @@ const UpdateChallenge = ({ onBack }) => {
             return;
         }
 
-        fetch(`http://localhost:3000/cards/${id}`, {
+        fetch(`https://eco-track-server-two.vercel.app/cards/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

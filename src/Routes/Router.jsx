@@ -27,8 +27,9 @@ export const router = createBrowserRouter([
                 path: "/",
                 element: <Home />,
                 loader: async () => {
-                    const res = await fetch('http://localhost:3000/cards');
-                    return res.json()}
+                    const res = await fetch('https://eco-track-server-two.vercel.app/cards');
+                    return res.json()
+                }
             },
         ]
     },
@@ -36,80 +37,83 @@ export const router = createBrowserRouter([
     {
         path: "/challenges",
         element: <Challenges />,
-         loader: async () => {
-                    const res = await fetch('http://localhost:3000/cards');
-                    return res.json()},
-                    
-        
+        loader: async () => {
+            const res = await fetch('https://eco-track-server-two.vercel.app/cards');
+            return res.json()
+        },
+
+
     },
     {
-      path: "/challengeDetails/:id",
-      element: 
-      <ChallengeDetails></ChallengeDetails>,
-       loader: async () => {
-                    const res = await fetch('http://localhost:3000/cards');
-                    return res.json()},
+        path: "/challengeDetails/:id",
+        element:
+            <ChallengeDetails></ChallengeDetails>,
+        loader: async () => {
+            const res = await fetch('https://eco-track-server-two.vercel.app/cards');
+            return res.json()
+        },
     },
     {
         path: "/updateChallenge/:id",
         element: <PrivateRoute>
             <UpdateChallenge></UpdateChallenge>
-            </PrivateRoute>,
+        </PrivateRoute>,
         loader: async () => {
-                    const res = await fetch('http://localhost:3000/cards');
-                    return res.json()},
-       
+            const res = await fetch('https://eco-track-server-two.vercel.app/cards');
+            return res.json()
+        },
+
     }
     ,
     {
         path: "/myActivities",
         element: <PrivateRoute>
-         <MyActivities />
-         </PrivateRoute>,
-         
-         
-        
+            <MyActivities />
+        </PrivateRoute>,
+
+
+
     },
     {
-      path: '/loading',
+        path: '/loading',
         element: <Loading></Loading>
     },
     {
         path: '/addNewChallenge',
         element: <PrivateRoute>
-        <AddNewChallenge></AddNewChallenge>
+            <AddNewChallenge></AddNewChallenge>
         </PrivateRoute>,
     },
     {
         path: '/myChallenges',
         element: <PrivateRoute>
-        <MyChallenges></MyChallenges>
+            <MyChallenges></MyChallenges>
         </PrivateRoute>,
     },
     {
-                    path: '/auth/login',
-                    element: <Login></Login>,
-                },
-                 {
-                    path: '/auth/register',
-                    element: <Register></Register>,
-                },
-                
-                 {
-                    path: '/auth/forget-password',
-                    element: <ForgetPassword></ForgetPassword>
-                 }
+        path: '/auth/login',
+        element: <Login></Login>,
+    },
+    {
+        path: '/auth/register',
+        element: <Register></Register>,
+    },
+
+    {
+        path: '/auth/forget-password',
+        element: <ForgetPassword></ForgetPassword>
+    }
 ],
     {
-            path: '/dashboard',
-            element: <DashBoardlayout></DashBoardlayout>,
-            children: [
-                
-                
-                
-               
-            ]
+        path: '/dashboard',
+        element: <DashBoardlayout></DashBoardlayout>,
+        children: [
 
-        },
-     
+
+
+
+        ]
+
+    },
+
 )

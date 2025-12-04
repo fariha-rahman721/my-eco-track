@@ -6,7 +6,7 @@ const UpcomingEvents = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/upcomingEvents`)
+    fetch(`https://eco-track-server-two.vercel.app/upcomingEvents`)
       .then(res => res.json())
       .then(data => {
         setEvents(data);
@@ -39,7 +39,7 @@ const UpcomingEvents = () => {
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between my-6 sm:my-12">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-900 mb-4 sm:mb-0">Upcoming Events</h2>
-        
+
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">

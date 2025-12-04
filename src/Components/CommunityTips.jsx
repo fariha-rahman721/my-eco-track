@@ -23,7 +23,7 @@ const CommunityTips = () => {
     const [comments, setComments] = useState(getStoredComments());
 
     useEffect(() => {
-        fetch('http://localhost:3000/communityTips')
+        fetch('https://eco-track-server-two.vercel.app/communityTips')
             .then(res => res.json())
             .then(data => setTips(data));
     }, []);
@@ -104,7 +104,7 @@ const CommunityTips = () => {
                                 {tip.content}
                             </p>
 
-                           {/* cmnt */}
+                            {/* cmnt */}
                             {activeComment === tip._id && (
                                 <div className="mb-4 bg-slate-50 p-4 rounded-xl">
                                     <div className="flex justify-between items-start">
@@ -147,7 +147,7 @@ const CommunityTips = () => {
 
                                 <div className="flex items-center gap-4">
 
-                                  
+
                                     <button
                                         onClick={() => handleLike(tip._id)}
                                         className="flex items-center gap-1.5 text-slate-400 hover:text-emerald-600"
@@ -156,7 +156,7 @@ const CommunityTips = () => {
                                         <span className="text-xs font-medium">{totalLikes}</span>
                                     </button>
 
-                                   
+
                                     <button
                                         onClick={() => handleOpenComment(tip._id)}
                                         className="flex items-center gap-1.5 text-slate-400 hover:text-blue-600"

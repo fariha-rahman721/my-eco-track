@@ -11,7 +11,7 @@ const SingleChallenge = ({ details }) => {
 
     useEffect(() => {
         if (!user?.email) return;
-        fetch(`http://localhost:3000/cards/${details._id}`, {
+        fetch(`https://eco-track-server-two.vercel.app/cards/${details._id}`, {
             headers: {
                 authorization: `Bearer ${user?.accessToken}`,
             },
@@ -43,7 +43,7 @@ const SingleChallenge = ({ details }) => {
             createdBy: user?.email,
         };
 
-        fetch(`http://localhost:3000/join-challenges/${details._id}`, {
+        fetch(`https://eco-track-server-two.vercel.app/join-challenges/${details._id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

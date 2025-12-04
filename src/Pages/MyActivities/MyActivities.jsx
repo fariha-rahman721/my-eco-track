@@ -19,7 +19,7 @@ const MyActivities = () => {
     useEffect(() => {
         if (!user?.email) return;
 
-        fetch(`http://localhost:3000/my-activities?email=${user?.email}`, {
+        fetch(`https://eco-track-server-two.vercel.app/my-activities?email=${user?.email}`, {
             method: "GET",
             headers: {
                 authorization: `Bearer ${user?.accessToken}`,
@@ -43,7 +43,7 @@ const MyActivities = () => {
         }).then((result) => {
 
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/my-activities/${id}`, {
+                fetch(`https://eco-track-server-two.vercel.app/my-activities/${id}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
