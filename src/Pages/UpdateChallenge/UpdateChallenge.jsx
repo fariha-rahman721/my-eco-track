@@ -91,25 +91,26 @@ const UpdateChallenge = ({ onBack }) => {
         }
 
         fetch(`http://localhost:3000/cards/${id}`, {
-            method: 'PUT',
+            method: "PUT",
             headers: {
-                'Content-Type': 'application/json',
-                authorization: `Bearer ${user?.accessToken}}`,
-            }
-            ,
-            body: JSON.stringify( setFormData(formData) ),
+                "Content-Type": "application/json",
+                authorization: `Bearer ${user?.accessToken}`,   // ✅ FIXED
+            },
+            body: JSON.stringify(formData),  // ✅ FIXED
         })
             .then(res => res.json())
-            .then(() => {
-                
-                toast.success("Challenge updated Successfully!");
-                
+            .then((data) => {
+                if (data.success) {
+                    toast.success("Challenge updated Successfully!");
+                } else {
+                    toast.error("Update failed!");
+                }
             })
             .catch(() => {
                 toast.error("Something went wrong!");
             });
-        
     };
+
 
     return (
         <div className="w-full sm:w-11/12 md:w-10/12 lg:w-9/12 mx-auto">

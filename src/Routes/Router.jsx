@@ -13,11 +13,13 @@ import PrivateRoute from "../Provider/PrivateRoute";
 import Loading from "../Components/Loading";
 import MyChallenges from "../Pages/MyChallenges/MyChallenges";
 import UpdateChallenge from "../Pages/UpdateChallenge/UpdateChallenge";
+import Error from "../Pages/Error/Error";
 
 
 export const router = createBrowserRouter([
     {
         path: '/',
+        errorElement: <Error></Error>,
         element: <PublicLayout></PublicLayout>,
         children: [
             {
@@ -42,7 +44,8 @@ export const router = createBrowserRouter([
     },
     {
       path: "/challengeDetails/:id",
-      element: <ChallengeDetails></ChallengeDetails>,
+      element: 
+      <ChallengeDetails></ChallengeDetails>,
        loader: async () => {
                     const res = await fetch('http://localhost:3000/cards');
                     return res.json()},
