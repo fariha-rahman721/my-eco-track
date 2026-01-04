@@ -1,5 +1,5 @@
 ## Website Name: Eco-Track
-### Live Site URL (Client Side):
+### Live Site URL (Client Side): https://melodious-bonbon-3a2729.netlify.app/
 
 ### Features of Eco-Track:
 #### Real-time Environmental Monitoring:
