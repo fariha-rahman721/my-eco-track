@@ -72,7 +72,7 @@ const MyActivities = () => {
 
     return (
         <div>
-            <Navbar />
+            
 
             <div className="card w-11/12 mx-auto p-6">
 
