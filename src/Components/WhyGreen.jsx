@@ -8,7 +8,7 @@ const WhyGreen = () => {
       mt-8 sm:mt-10 
       bg-emerald-900 text-white 
       relative overflow-hidden 
-      w-full sm:w-11/12 mx-auto 
+      w-full max-w-7xl mx-auto 
       mb-12 sm:mb-16 lg:mb-20 
       rounded-xl sm:rounded-2xl 
       shadow-2xl 

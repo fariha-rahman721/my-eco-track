@@ -3,8 +3,15 @@ import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 const Footer = () => {
     return (
-        <footer className="bg-emerald-900 text-white py-10 w-11/12 mx-auto mt-8">
-            <div className="w-11/12 mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+        <footer className="bg-emerald-900 text-white py-10 w-full mt-8"
+        style={{
+                width: "100vw",
+                maxWidth: "100vw",
+                marginLeft: "calc(-50vw + 50%)",
+                backgroundColor: "#064e3b", 
+            }}
+        >
+            <div className="max-w-7xl mx-auto px-4 mt-8 pt-6 border-t border-green-950 flex flex-col md:flex-row justify-between items-center text-xs text-white gap-4">
                 
                 {/* Brand & Copyright */}
                 <div className="flex flex-col items-center md:items-start">

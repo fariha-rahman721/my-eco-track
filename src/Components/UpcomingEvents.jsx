@@ -1,3 +1,4 @@
+import { MapPin } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -35,7 +36,7 @@ const UpcomingEvents = () => {
   };
 
   return (
-    <div className='w-full sm:w-11/12 lg:w-10/12 mx-auto px-2 sm:px-4'>
+    <div className='w-full sm:max-w-7xl lg:max-w-7xl mx-auto px-2 sm:px-4'>
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between my-6 sm:my-12">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-900 mb-4 sm:mb-0">Upcoming Events</h2>
@@ -66,10 +67,10 @@ const UpcomingEvents = () => {
               <div className="p-4 sm:p-5 flex-1 flex flex-col">
                 <h3 className="font-bold text-lg sm:text-xl text-gray-900 mb-1">{event.title}</h3>
                 <p className="text-sm sm:text-base text-gray-600 line-clamp-2">{event.description}</p>
-                <p className="text-xs sm:text-sm text-gray-500 mt-2">📍 {event.location}</p>
+                <p className="text-xs sm:text-sm text-gray-500 mt-2 flex gap-2"><span><MapPin /></span> {event.location}</p>
 
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-4 text-gray-700 gap-2 sm:gap-4">
-                  <p className="text-sm sm:text-base text-white bg-emerald-500 p-2 rounded">
+                  <p className="text-sm sm:text-base p-2 rounded">
                     Max Participants: {event.maxParticipants}
                   </p>
                   <p className='text-xs sm:text-sm p-2 rounded'>👥 {event.currentParticipants} joined</p>

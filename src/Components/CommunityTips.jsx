@@ -69,7 +69,7 @@ const CommunityTips = () => {
     };
 
     return (
-        <div className="w-11/12 mx-auto ">
+        <div className="max-w-7xl mx-auto ">
             <Toaster />
 
             <div className="flex items-center justify-between mb-8">

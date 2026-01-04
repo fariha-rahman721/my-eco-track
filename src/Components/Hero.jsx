@@ -8,7 +8,15 @@ import { Link } from "react-router";
 
 const Hero = ({ banners }) => {
     return (
-        <div className="w-11/12 mx-auto h-[260px] sm:h-[350px] md:h-[500px] lg:h-[600px]  sm:px-4">
+        <div
+            className="h-[260px] sm:h-[350px] md:h-[500px] lg:h-[600px]"
+            style={{
+                width: "100vw",
+                maxWidth: "100vw",
+                marginLeft: "calc(-50vw + 50%)",
+            }}
+        >
+
             <Swiper
                 modules={[Autoplay, Pagination, EffectFade]}
                 autoplay={{ delay: 2000 }}

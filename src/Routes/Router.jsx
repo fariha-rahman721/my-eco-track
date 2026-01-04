@@ -14,6 +14,11 @@ import Loading from "../Components/Loading";
 import MyChallenges from "../Pages/MyChallenges/MyChallenges";
 import UpdateChallenge from "../Pages/UpdateChallenge/UpdateChallenge";
 import Error from "../Pages/Error/Error";
+import TotalParticipants from "../Dashboard/Admin/TotalParticipants";
+import About from "../Components/About";
+import Privacy from "../Components/Privacy";
+import AdminStatistics from "../Dashboard/Admin/AdminStatistics";
+import UsersPage from "../Dashboard/Admin/UsersPage";
 
 
 export const router = createBrowserRouter([
@@ -70,10 +75,16 @@ export const router = createBrowserRouter([
         element: <PrivateRoute>
             <MyActivities />
         </PrivateRoute>,
-
-
-
     },
+    {
+        path: '/about',
+        element: <About></About>
+    },
+    {
+        path: '/privacy',
+        element: <Privacy></Privacy>
+    },
+
     {
         path: '/loading',
         element: <Loading></Loading>
@@ -84,12 +95,7 @@ export const router = createBrowserRouter([
             <AddNewChallenge></AddNewChallenge>
         </PrivateRoute>,
     },
-    {
-        path: '/myChallenges',
-        element: <PrivateRoute>
-            <MyChallenges></MyChallenges>
-        </PrivateRoute>,
-    },
+    
     {
         path: '/auth/login',
         element: <Login></Login>,
@@ -102,18 +108,35 @@ export const router = createBrowserRouter([
     {
         path: '/auth/forget-password',
         element: <ForgetPassword></ForgetPassword>
-    }
-],
+    },
     {
         path: '/dashboard',
-        element: <DashBoardlayout></DashBoardlayout>,
+        element: <PrivateRoute><DashBoardlayout></DashBoardlayout></PrivateRoute>,
         children: [
-
-
-
+        {
+            path: "totalParticipants",
+            element: <TotalParticipants></TotalParticipants>
+        },
+        {
+        path: 'myChallenges',
+        element: <MyChallenges></MyChallenges>
+        
+    },
+        {
+        path: 'adminStatistics',
+        element: <AdminStatistics></AdminStatistics>
+        
+    },
+        {
+        path: 'usersPage',
+        element: <UsersPage></UsersPage>
+        
+    },
 
         ]
 
     },
+],
+    
 
 )

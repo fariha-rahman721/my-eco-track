@@ -10,6 +10,7 @@ import CommunityTips from '../../Components/CommunityTips';
 import WhyGreen from '../../Components/WhyGreen';
 import UpcomingEvents from '../../Components/UpcomingEvents';
 import HowItWorks from '../../Components/HowItWorks';
+import Category from '../../Components/Category';
 
 
 const Home = () => {
@@ -20,12 +21,16 @@ const Home = () => {
         <div >
              <Hero banners={data} />
 
+             <div className="max-w-full">
+              <Category data={data}></Category>
+             </div>
+
             
              
              {/* card */}
              <div className="">
                <h1 className='text-3xl font-bold text-green-900 m-10'>Active Challenges</h1>
-             <div className="w-11/12 mx-auto grid grid-cols-1 lg:w-11/12 lg:grid-cols-2 gap-6 p-2">
+             <div className="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
              
                 {data.slice(0, 5).map(card => (
                     <AllCard key={card._id} card={card} />

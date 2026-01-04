@@ -15,13 +15,15 @@ const ChallengeDetails = () => {
         <div>
             <Navbar />
 
-            <main className="w-11/12 mx-auto md:w-11/12 lg:w-11/12">
+            <main className="w-11/12 mx-auto mt-8 md:w-11/12 lg:w-11/12">
                 {details ? (
                     <SingleChallenge details={details} />
                 ) : (
                     <p className="text-center mt-10">Challenge not found...</p>
                 )}
             </main>
+
+            
 
             <Footer />
         </div>
