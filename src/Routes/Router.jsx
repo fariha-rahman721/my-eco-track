@@ -132,6 +132,12 @@ export const router = createBrowserRouter([
         element: <UsersPage></UsersPage>
         
     },
+    {
+        path: "myActivities",
+        element: 
+            <MyActivities />
+        
+    },
 
         ]
 

@@ -33,7 +33,7 @@ const TotalParticipants = () => {
     return (
         <div className="max-w-7xl mx-auto mt-6 p-4">
             <h1 className="text-2xl text-green-900 font-bold mb-6">
-                Total Participants ({participants.length})
+               My Total Participation ({participants.length})
             </h1>
 
             {participants.length === 0 && (
@@ -70,7 +70,7 @@ const TotalParticipants = () => {
 
                         <div className="flex items-end gap-4">
                             <span className="text-sm font-semibold text-emerald-900">
-                                Participants: {p.participants || 0}
+                                My Participation {p.participants || 0}
                             </span>
                         </div>
                     </div>
